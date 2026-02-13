@@ -1,4 +1,4 @@
-interface Task {
+export interface Task {
   id: number;
   task: string;
   completed: boolean;
@@ -9,7 +9,7 @@ interface TaskState {
   editingTaskId: number | null;
 }
 
-type taskAction =
+export type taskAction =
   | { type: "ADD_TASK"; payload: string }
   | { type: "TOGGLE_TASK"; payload: number }
   | { type: "DELETE_TASK"; payload: number }

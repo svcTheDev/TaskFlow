@@ -1,17 +1,14 @@
-import React, { useEffect, useReducer, useState } from "react";
-import { taskReducer, getInitialStateTask } from "@/state/taskReducer";
-
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import TaskList from "./TaskList";
+import { useTasksContext } from "@/hooks/TasksContext";
 
 export default function TaskForm() {
   const [inputValue, setInputValue] = useState("");
-  const [state, dispatcher] = useReducer(taskReducer, getInitialStateTask());
+  const { state, dispatcher } = useTasksContext();
 
-  const { tasks, editingTaskId} = state;
-
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (inputValue.trim().length === 0) return;
 
@@ -21,7 +18,7 @@ export default function TaskForm() {
   };
 
   useEffect(() => {
-    console.log(tasks);
+    console.log(state);
   }, [state]);
 
   useEffect(() => {
@@ -32,7 +29,8 @@ export default function TaskForm() {
     <>
       <form onSubmit={handleSubmit}>
         <label htmlFor="">Insertar tarea</label>
-        <Input className="mb-4"
+        <Input
+          className="mb-4"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           placeholder="Escribe la tarea"
@@ -42,7 +40,7 @@ export default function TaskForm() {
         </Button>
       </form>
 
-      <TaskList tasks={tasks} state={state} dispatcher={dispatcher} editingTaskId={editingTaskId}/>
+      <TaskList />
     </>
   );
 }
