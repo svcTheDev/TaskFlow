@@ -9,7 +9,7 @@ export default function TaskForm() {
   const [inputValue, setInputValue] = useState("");
   const [state, dispatcher] = useReducer(taskReducer, getInitialStateTask());
 
-  const { tasks } = state;
+  const { tasks, editingTaskId} = state;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,7 +42,7 @@ export default function TaskForm() {
         </Button>
       </form>
 
-      <TaskList tasks={tasks}/>
+      <TaskList tasks={tasks} state={state} dispatcher={dispatcher} editingTaskId={editingTaskId}/>
     </>
   );
 }
