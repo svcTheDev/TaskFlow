@@ -6,16 +6,7 @@ import { useTasksContext } from "@/hooks/TasksContext";
 
 export default function TaskForm() {
   const [inputValue, setInputValue] = useState("");
-  const { state, dispatcher } = useTasksContext();
-
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (inputValue.trim().length === 0) return;
-
-    dispatcher({ type: "ADD_TASK", payload: inputValue });
-
-    setInputValue("");
-  };
+  const { state, handleSubmit } = useTasksContext();
 
   useEffect(() => {
     console.log(state);
@@ -27,8 +18,8 @@ export default function TaskForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="">Insertar tarea</label>
+      <form onSubmit={(e) => handleSubmit(e, inputValue, setInputValue)}>
+        <label htmlFor="task">Insertar tarea</label>
         <Input
           className="mb-4"
           value={inputValue}
