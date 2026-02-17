@@ -7,6 +7,8 @@ export interface Task {
 interface TaskState {
   tasks: Task[];
   editingTaskId: number | null;
+  completed: number;
+  pending: number;
 }
 
 export type taskAction =
@@ -23,6 +25,8 @@ export const getInitialStateTask = () => {
     return {
       tasks: [],
       editingTaskId: null,
+      completed: 0,
+      pending: 0
     };
   } else {
     return JSON.parse(localStorageState);
@@ -41,6 +45,7 @@ export const taskReducer = (state: TaskState, action: taskAction) => {
       return {
         ...state,
         tasks: [...state.tasks, newTask],
+        pending: [...state.tasks, newTask].filter((task) => !task.completed).length,
       };
     }
     case "TOGGLE_TASK": {
@@ -57,6 +62,8 @@ export const taskReducer = (state: TaskState, action: taskAction) => {
       return {
         ...state,
         tasks: updatedTasks,
+        completed: updatedTasks.filter((task) => task.completed).length,
+        pending: updatedTasks.filter((task) => !task.completed).length,
       };
     }
     case "DELETE_TASK": {
@@ -67,6 +74,8 @@ export const taskReducer = (state: TaskState, action: taskAction) => {
       return {
         ...state,
         tasks: updatedTasks,
+        completed: updatedTasks.filter((task) => task.completed).length,
+        pending: updatedTasks.filter((task) => !task.completed).length,
       };
     }
     case "START_EDIT": {
@@ -91,7 +100,7 @@ export const taskReducer = (state: TaskState, action: taskAction) => {
       return {
         ...state,
         tasks: updatedTasks,
-        editingTaskId: null
+        editingTaskId: null,
       };
     }
     case "CANCEL_EDIT": {

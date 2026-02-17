@@ -8,9 +8,11 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-import { TasksProvider } from "@/hooks/TaskProvider";
+import { useTasksContext } from "@/hooks/TasksContext";
 
 export default function MainLayout() {
+  const { state } = useTasksContext();
+
 
   return (
     <div className="min-h-screen bg-linear-to-r from-slate-900 to-slate-700 px-4 py-10 ">
@@ -26,13 +28,15 @@ export default function MainLayout() {
           </CardHeader>
 
           <CardContent className="space-y-6">
-            <TasksProvider>
               <TaskForm />
-            </TasksProvider>
           </CardContent>
 
-          <CardFooter className="text-xs text-zinc-500">
-            Total de tareas: 0
+          <CardFooter className="text-xs text-zinc-500">{
+            `
+            Total de tareas: ${state.tasks.length}
+            Tareas Completadas: ${state.completed}
+            Tareas Pendientes. ${state.pending}`
+            }
           </CardFooter>
         </Card>
       </div>

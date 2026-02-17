@@ -1,12 +1,12 @@
-import { useState } from 'react'
-import MainLayout from './layouts/MainLayout'
+import MainLayout from "./layouts/MainLayout";
+import { TasksProvider } from "./hooks/TaskProvider";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-        <MainLayout/>
-  )
+    <TasksProvider>
+      <MainLayout />
+    </TasksProvider>
+  );
 }
 
-export default App
+export default App;
