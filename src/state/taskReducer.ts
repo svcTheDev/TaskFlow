@@ -9,6 +9,7 @@ interface TaskState {
   editingTaskId: number | null;
   completed: number;
   pending: number;
+  filter_view: string;
 }
 
 export type taskAction =
@@ -17,7 +18,8 @@ export type taskAction =
   | { type: "DELETE_TASK"; payload: number }
   | { type: "START_EDIT"; payload: number }
   | { type: "SAVE_EDIT"; payload: { item: string; id: number } }
-  | { type: "CANCEL_EDIT"; payload: null };
+  | { type: "CANCEL_EDIT"; payload: null }
+  | { type: "FILTER_VIEW"; payload: "all" | "pending" | "completed" }
 
 export const getInitialStateTask = () => {
   const localStorageState = localStorage.getItem("tasks-state");
@@ -26,7 +28,8 @@ export const getInitialStateTask = () => {
       tasks: [],
       editingTaskId: null,
       completed: 0,
-      pending: 0
+      pending: 0,
+      filter_view: 'all',
     };
   } else {
     return JSON.parse(localStorageState);
@@ -107,6 +110,12 @@ export const taskReducer = (state: TaskState, action: taskAction) => {
       return {
         ...state,
         editingTaskId: action.payload,
+      };
+    }
+    case "FILTER_VIEW": {
+      return {
+        ...state,
+        filter_view: action.payload,
       };
     }
 

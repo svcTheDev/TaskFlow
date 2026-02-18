@@ -11,7 +11,7 @@ import {
 import { useTasksContext } from "@/hooks/TasksContext";
 
 export default function MainLayout() {
-  const { state } = useTasksContext();
+  const { state, handleFilterView } = useTasksContext();
 
 
   return (
@@ -31,12 +31,11 @@ export default function MainLayout() {
               <TaskForm />
           </CardContent>
 
-          <CardFooter className="text-xs text-zinc-500">{
-            `
-            Total de tareas: ${state.tasks.length}
-            Tareas Completadas: ${state.completed}
-            Tareas Pendientes. ${state.pending}`
-            }
+          <CardFooter className="text-xs text-zinc-500">
+            
+            <a className="cursor-pointer" onClick={() => handleFilterView('all')}>Total de tareas: {state.tasks.length}</a>
+            <a className="cursor-pointer" onClick={() => handleFilterView('completed')}>Tareas Completadas: {state.completed}</a>
+            <a className="cursor-pointer" onClick={() => handleFilterView('pending')}>Tareas Pendientes: {state.pending}</a>
           </CardFooter>
         </Card>
       </div>

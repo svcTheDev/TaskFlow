@@ -5,12 +5,16 @@ export default function useTasks() {
   const [state, dispatcher] = useReducer(taskReducer, getInitialStateTask());
   const [editValue, setEditValue] = useState("");
 
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>, Value : string, setValue: React.Dispatch<React.SetStateAction<string>>) => {
+  const handleSubmit = (
+    e: React.SubmitEvent<HTMLFormElement>,
+    Value: string,
+    setValue: React.Dispatch<React.SetStateAction<string>>,
+  ) => {
     e.preventDefault();
     if (Value.trim().length === 0) return;
     dispatcher({ type: "ADD_TASK", payload: Value });
 
-    setValue('')
+    setValue("");
   };
 
   const onToggle = (id: number) => {
@@ -33,8 +37,9 @@ export default function useTasks() {
     dispatcher({ type: "CANCEL_EDIT", payload: null });
   };
 
-
-
+  const handleFilterView = (view : "all" | "pending" | "completed") => {
+    dispatcher({ type: "FILTER_VIEW", payload: view });
+  };
 
   return {
     // Properties
@@ -49,5 +54,6 @@ export default function useTasks() {
     onStartEdit,
     onSaveEdit,
     onCancelEdit,
+    handleFilterView,
   };
 }

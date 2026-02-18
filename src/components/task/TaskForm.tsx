@@ -8,10 +8,7 @@ export default function TaskForm() {
   const [inputValue, setInputValue] = useState("");
   const { state, handleSubmit } = useTasksContext();
 
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
-
+  
   useEffect(() => {
     localStorage.setItem("tasks-state", JSON.stringify(state));
   }, [state]);
