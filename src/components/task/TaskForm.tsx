@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import TaskList from "./TaskList";
@@ -6,12 +6,7 @@ import { useTasksContext } from "@/hooks/TasksContext";
 
 export default function TaskForm() {
   const [inputValue, setInputValue] = useState("");
-  const { state, handleSubmit } = useTasksContext();
-
-  
-  useEffect(() => {
-    localStorage.setItem("tasks-state", JSON.stringify(state));
-  }, [state]);
+  const { handleSubmit } = useTasksContext();
 
   return (
     <>

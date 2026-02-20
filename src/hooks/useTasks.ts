@@ -41,6 +41,10 @@ export default function useTasks() {
     dispatcher({ type: "FILTER_VIEW", payload: view });
   };
 
+  const handleQuerySearch = (query : string) => {
+    dispatcher({ type: "SET_SEARCH", payload: query });
+  }
+
   return {
     // Properties
     state,
@@ -55,5 +59,6 @@ export default function useTasks() {
     onSaveEdit,
     onCancelEdit,
     handleFilterView,
+    handleQuerySearch
   };
 }

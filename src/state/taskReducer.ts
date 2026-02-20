@@ -10,6 +10,7 @@ interface TaskState {
   completed: number;
   pending: number;
   filter_view: string;
+  search_query: string;
 }
 
 export type taskAction =
@@ -20,6 +21,7 @@ export type taskAction =
   | { type: "SAVE_EDIT"; payload: { item: string; id: number } }
   | { type: "CANCEL_EDIT"; payload: null }
   | { type: "FILTER_VIEW"; payload: "all" | "pending" | "completed" }
+  | { type: "SET_SEARCH"; payload: string };
 
 export const getInitialStateTask = () => {
   const localStorageState = localStorage.getItem("tasks-state");
@@ -29,7 +31,8 @@ export const getInitialStateTask = () => {
       editingTaskId: null,
       completed: 0,
       pending: 0,
-      filter_view: 'all',
+      filter_view: "all",
+      search_query: "",
     };
   } else {
     return JSON.parse(localStorageState);
@@ -48,7 +51,8 @@ export const taskReducer = (state: TaskState, action: taskAction) => {
       return {
         ...state,
         tasks: [...state.tasks, newTask],
-        pending: [...state.tasks, newTask].filter((task) => !task.completed).length,
+        pending: [...state.tasks, newTask].filter((task) => !task.completed)
+          .length,
       };
     }
     case "TOGGLE_TASK": {
@@ -116,6 +120,12 @@ export const taskReducer = (state: TaskState, action: taskAction) => {
       return {
         ...state,
         filter_view: action.payload,
+      };
+    }
+    case "SET_SEARCH": {
+      return {
+        ...state,
+        search_query: action.payload,
       };
     }
 
