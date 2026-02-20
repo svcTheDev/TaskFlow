@@ -78,6 +78,20 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --bg-mint-1: #c5e9ed;
+  --bg-mint-2: #b6dce2;
+  --bg-mint-3: #8fb7bc;
+
+  --card-top-1: #7d8fb2;
+  --card-top-2: #6b7c9e;
+  --card-body: #f3f3f4;
+
+  --line: #d9d9dc;
+  --text-main: #2f2f32;
+  --text-muted: #8e8e93;
+  --accent-green: #a7df48;
+
+  --shadow-blue: #7d87b8;
 }
 
 .dark {
@@ -112,6 +126,47 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+.bg-todo-scene {
+  background: radial-gradient(
+    circle at 50% 40%,
+    var(--bg-mint-1) 0%,
+    var(--bg-mint-2) 45%,
+    var(--bg-mint-3) 100%
+  );
+}
+
+/* Card top bar gradient */
+.bg-todo-topbar {
+  background: linear-gradient(
+    180deg,
+    var(--card-top-1) 0%,
+    var(--card-top-2) 100%
+  );
+}
+
+/* Soft card glow/shadow */
+.shadow-todo {
+  box-shadow:
+    0 20px 45px color-mix(in srgb, var(--shadow-blue) 55%, transparent),
+    0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.primary {
+  color: var(--card-top-1);
+}
+
+.primary:hover {
+  color: var(--bg-mint-2);
+}
+
+.secondary {
+  color: var(--card-top-2);
+}
+
+.third {
+  color: var(--bg-mint-2);
 }
 
 @layer base {

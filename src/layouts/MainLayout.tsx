@@ -30,13 +30,13 @@ export default function MainLayout() {
   }, [state]);
 
   return (
-    <div className="min-h-screen bg-linear-to-r from-slate-900 to-slate-700 px-4 py-10 ">
+    <div className="pt-9 min-h-screen bg-linear-to-r bg-todo-scene ">
       <div className="mx-auto w-full max-w-xl">
         <div className="relative flex items-center gap-2">
           <button
             type="button"
             onClick={() => setShowSearch((prev) => !prev)}
-            className="cursor-pointer rounded-md border border-zinc-700 bg-zinc-900 p-2 text-zinc-200 transition hover:bg-zinc-800"
+            className="cursor-pointer rounded-md border bg-todo-topbar p-2 text-zinc-200 transition hover:bg-zinc-800"
             aria-label="Toggle search"
           >
             {showSearch ? (
@@ -56,17 +56,17 @@ export default function MainLayout() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Buscar Tarea..."
-              className="w-full rounded-md border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 outline-none placeholder:text-zinc-500 focus:border-blue-500"
+              className="w-full rounded-md borderpx-3 py-2 text-sm  outline-none placeholder:text-zinc-500"
             />
           </div>
         </div>
 
-        <Card className="border-zinc-800 bg-zinc-950 text-zinc-100 shadow-xl">
-          <CardHeader>
-            <CardTitle className="text-2xl font-semibold">
+        <Card className="shadow-todo">
+          <CardHeader className="space-y-2 pb-2">
+            <CardTitle className="bg-linear-to-r from-slate-900 via-blue-900 to-slate-700 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent">
               TaskFlow Lite
             </CardTitle>
-            <CardDescription className="text-zinc-400">
+            <CardDescription className="text-base text-slate-600">
               Organiza tus tareas diarias
             </CardDescription>
           </CardHeader>
