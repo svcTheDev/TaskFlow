@@ -1,11 +1,15 @@
-import MainLayout from "./layouts/MainLayout";
 import { TasksProvider } from "./hooks/TaskProvider";
+import { AuthProvider } from "./context/authProvider";
+import { RouterProvider } from "react-router";
+import AppRouter from "./routes/AppRouter";
 
 function App() {
   return (
-    <TasksProvider>
-      <MainLayout />
-    </TasksProvider>
+    <AuthProvider>
+      <TasksProvider>
+        <AppRouter/>
+      </TasksProvider>
+    </AuthProvider>
   );
 }
 

@@ -9,8 +9,11 @@ import {
 } from "@/components/ui/card";
 import { useTasksContext } from "@/hooks/TasksContext";
 import { Search, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/context/authProvider";
 
 export default function MainLayout() {
+  const {logout} = useAuth();
   const { state, handleQuerySearch } = useTasksContext();
   const [showSearch, setShowSearch] = useState(false);
   const [query, setQuery] = useState("");
@@ -73,6 +76,14 @@ export default function MainLayout() {
 
           <CardContent className="space-y-6">
             <TaskForm />
+            <Button
+              onClick={logout}
+              className="bg-rose-700 transition cursor-pointer"
+              type="submit"
+              size="lg"
+            >
+              Salir
+            </Button>
           </CardContent>
         </Card>
       </div>
